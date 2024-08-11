@@ -1,66 +1,30 @@
-## Foundry
+# Foundry FundMe Smart Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+### Implemented the FundMe smart contract using Chainlink Oracles for ETH to USD price conversions. 
 
-Foundry consists of:
+***The contract allows users to fund in ETH based on USD threshold using PriceConverter utilities.***
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+**Features include:**
 
-## Documentation
+- Owner-only withdrawal functions and safeguards against insufficient funding amounts. 
+- Integrated error handling using custom errors for owner validation. 
+- Enhanced contract reliability and security with immutable price feed and owner state variables.
+- PriceConverter library facilitate ETH to USD conversions using Chainlink Oracles. 
+    - Integrated with AggregatorV3Interface to ensure real-time and reliable price feeds.
 
-https://book.getfoundry.sh/
+### Scipts
 
-## Usage
+- ***DeployFundMe.s.sol*** - Script using Forge standard library to deploy the FundMe contract. The script leverages HelperConfig to automatically select the appropriate network configuration, ensuring flexible deployments across different networks.
 
-### Build
+- Implemented two Foundry scripts, FundFundMe and WithdrawFundMe, to manage automated funding and balance withdrawal of the most recently deployed FundMe contract.
 
-```shell
-$ forge build
-```
+### Tests
 
-### Test
+Added comprehensive ***testing suite*** for the FundMe contract. The tests cover all critical functionalities such as: 
+- funding
+- owner withdrawals
+- permissions
+- fallback mechanisms
+- tests for both individual and multiple funders
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Implemented ***integration tests*** to verify user interaction scenarios. Tests ensure that users can fund and withdraw correctly through scripted interactions, validating the contract's behavior in realistic transaction sequences. Covers funding and withdrawal processes to confirm contract integrity and functionality.
